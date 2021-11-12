@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "773120483846",
+    "firebase_url": "https://place-searcher-78b5b.firebaseio.com",
+    "project_id": "place-searcher-78b5b",
+    "storage_bucket": "place-searcher-78b5b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:773120483846:android:7f10cda51252416c",
+        "android_client_info": {
+          "package_name": "org.miage.placesearcher"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "773120483846-2jua7lv8sr92gn98h5t7s0nqq2mhd5f0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWy6btHsv3-DWp3wtTPqLkOlcx6k2clKE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

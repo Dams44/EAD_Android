@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="org.miage.placesearcher">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!--Permission de la caméra-->
+    <uses-permission android:name="android.permission.CAMERA" />
+
+
+    <application
+        android:name="com.activeandroid.app.Application"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+
+        <!-- Active Android Database definition -->
+        <!-- DB Name -->
+        <meta-data android:name="AA_DB_NAME" android:value="PlaceSearcher" />
+        <!-- DB Version -->
+        <meta-data android:name="AA_DB_VERSION" android:value="1" />
+        <!--Provider-->
+        <provider
+            android:name="com.activeandroid.content.ContentProvider"
+            android:authorities="org.miage.placesearcher"
+            android:enabled="true"
+            android:exported="false">
+        </provider>
+
+        <!-- Google Maps API Key -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBcRt3W8uifSjrhXBu2467iz9ciQqMNTzM"/>
+
+        <meta-data
+            android:name="AA_MODELS"
+            android:value="org.miage.placesearcher.model.PlaceAddress,
+                           org.miage.placesearcher.model.PlaceCoordinates,
+                           org.miage.placesearcher.model.PlaceProperties" />
+
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".PlaceDetailActivity" />
+        <activity android:name=".MapActivity" />
+
+        <service
+            android:name=".service.PlaceSearcherFirebaseNotificationService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+    </application>
+</manifest>
