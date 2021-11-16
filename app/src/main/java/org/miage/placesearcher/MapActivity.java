@@ -176,6 +176,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 if (associatedPlace != null) {
                     Intent seePlaceDetailIntent = new Intent(MapActivity.this, PlaceDetailActivity.class);
                     seePlaceDetailIntent.putExtra("placeStreet", associatedPlace.getProperties().name);
+                    //Récupération de la latitude et longitude pour créer un QR code avec coordonées GPS
+                    seePlaceDetailIntent.putExtra("Latitude", associatedPlace.getCoordinates().latitude);
+                    seePlaceDetailIntent.putExtra("Longitude", associatedPlace.getCoordinates().longitude);
                     startActivity(seePlaceDetailIntent);
                 }
             }

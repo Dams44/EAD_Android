@@ -11,7 +11,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,6 +27,9 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
+import com.journeyapps.barcodescanner.ScanContract;
+import com.journeyapps.barcodescanner.ScanIntentResult;
+import com.journeyapps.barcodescanner.ScanOptions;
 import com.squareup.otto.Subscribe;
 
 import org.miage.placesearcher.event.EventBusManager;
@@ -142,4 +148,33 @@ public class MainActivity extends AppCompatActivity {
         switchToMapIntent.putExtra("currentSearch", mSearchEditText.getText().toString());
         startActivity(switchToMapIntent);
     }
+
+
+    // Register the launcher and result handler
+    private final ActivityResultLauncher<ScanOptions> barcodeLauncher = registerForActivityResult(new ScanContract(),
+            /*result -> {
+                if(result.getContents() == null) {
+                    Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
+                }
+
+*/
+            new ActivityResultCallback<ScanIntentResult>() {
+                @Override
+                public void onActivityResult(ScanIntentResult result) {
+                    if(result.getContents() == null) {
+                        //Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
+                        Log.d("ScanQR", "onActivityResult: Cancelled");
+                    } else {
+                        //Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
+                        Log.d("ScanQR", "onActivityResult: "+ result.getContents());
+                    }
+                }
+            });
+    @OnClick(R.id.activity_main_qr_scan)
+    public void onQrScanButtonClick() {
+        barcodeLauncher.launch(new ScanOptions());
+    }
+
 }

@@ -47,6 +47,9 @@ public class PlaceDetailActivity extends AppCompatActivity {
     ImageView mQRcode;
 
     private String mPlaceStreetValue;
+    //QR code avec coordonnées GPS
+    private double mPlaceLatitute;
+    private double mPlaceLongitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +59,10 @@ public class PlaceDetailActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         mPlaceStreetValue = getIntent().getStringExtra("placeStreet");
         mPlaceStreet.setText(mPlaceStreetValue);
+
+        mPlaceLatitute = getIntent().getDoubleExtra("Latitude",0.0);
+        mPlaceLongitude = getIntent().getDoubleExtra("Longitude",0.0);
+
     }
 
     @OnClick(R.id.activity_detail_place_street)
@@ -89,11 +96,11 @@ public class PlaceDetailActivity extends AppCompatActivity {
         startActivityForResult(photoPickerIntent, SELECT_PHOTO);
     }
 
-    //Création du QR code de la place, le QR code contient le nom de la street
+    //Création du QR code de la place, le QR code contient les coordonées GPS
     @OnClick(R.id.activity_detail_QR_code)
     public void onClickOnGenerateQRcode() {
         if (!TextUtils.isEmpty(mPlaceStreetValue)) {
-            mQRcode.setImageBitmap(generate_QRCode_Bitmap(mPlaceStreetValue, 600, 600));
+            mQRcode.setImageBitmap(generate_QRCode_Bitmap("geo:"+mPlaceLatitute+','+mPlaceLongitude, 600, 600));
         }
     }
 
@@ -108,7 +115,8 @@ public class PlaceDetailActivity extends AppCompatActivity {
             for (int i = 0; i < height; i++) {
                 for (int j = 0; j < width; j++) {
                     if (encode.get(j, i)) {
-                        pixels[i * width + j] = 0x000000;
+                        //pixels[i * width + j] = 0x000000;
+                        pixels[i * width + j] = 0x0080FF;
                     } else {
                         pixels[i * width + j] = 0xffffff;
                     }
@@ -116,7 +124,7 @@ public class PlaceDetailActivity extends AppCompatActivity {
             }
             return Bitmap.createBitmap(pixels, 0, width, width, height, Bitmap.Config.RGB_565);
             //According to the official document, string: number of colors in the array between rows (must be > = width or < = - width)
-            // Namely Bitmap.createBitmap The third parameter in the method needs to be greater than width.
+            //Namely Bitmap.createBitmap The third parameter in the method needs to be greater than width.
         } catch (WriterException e) {
             e.printStackTrace();
         }
