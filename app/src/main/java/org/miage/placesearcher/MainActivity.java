@@ -152,29 +152,35 @@ public class MainActivity extends AppCompatActivity {
 
     // Register the launcher and result handler
     private final ActivityResultLauncher<ScanOptions> barcodeLauncher = registerForActivityResult(new ScanContract(),
-            /*result -> {
+            result -> {
                 if(result.getContents() == null) {
                     Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
                 }
+            });
 
-*/
+/*
             new ActivityResultCallback<ScanIntentResult>() {
                 @Override
                 public void onActivityResult(ScanIntentResult result) {
                     if(result.getContents() == null) {
-                        //Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
-                        Log.d("ScanQR", "onActivityResult: Cancelled");
+                        Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
+                        //Log.d("ScanQR", "onActivityResult: Cancelled");
                     } else {
-                        //Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
-                        Log.d("ScanQR", "onActivityResult: "+ result.getContents());
+                        Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
+                        //Log.d("ScanQR", "onActivityResult: "+ result.getContents());
                     }
                 }
-            });
+            }
+                );*/
+
     @OnClick(R.id.activity_main_qr_scan)
     public void onQrScanButtonClick() {
-        barcodeLauncher.launch(new ScanOptions());
+        ScanOptions options = new ScanOptions();
+        options.setBeepEnabled(false);
+        barcodeLauncher.launch(options);
+        //barcodeLauncher.launch(new ScanOptions());
     }
 
 }

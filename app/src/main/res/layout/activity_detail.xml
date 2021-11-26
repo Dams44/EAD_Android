@@ -39,6 +39,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="CHERCHER SUR GOOGLE"
+        android:drawableLeft="@drawable/ic_baseline_language_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/activity_detail_place_street" />
@@ -51,6 +52,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Partager"
+        android:drawableLeft="@drawable/ic_baseline_share_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/activity_detail_button_search" />
@@ -63,6 +65,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="CHOISIR IMAGE"
+        android:drawableLeft="@drawable/ic_baseline_image_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/activity_detail_button_share" />
@@ -85,6 +88,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Générer QR Code"
+        android:drawableLeft="@drawable/ic_baseline_qr_code_24"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"

@@ -18,6 +18,7 @@
             android:layout_margin="5dp"
             android:ems="10"
             android:hint="Recherchez un lieu"
+            android:drawableLeft="@drawable/ic_baseline_search_24"
             android:inputType="text"/>
 
         <fragment
@@ -38,6 +39,7 @@
     <Button
         android:id="@+id/activity_map_switch_button"
         android:text="List"
+        android:drawableLeft="@drawable/ic_baseline_view_list_24"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
