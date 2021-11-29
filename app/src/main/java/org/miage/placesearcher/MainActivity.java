@@ -3,6 +3,7 @@ package org.miage.placesearcher;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -154,31 +155,42 @@ public class MainActivity extends AppCompatActivity {
     private final ActivityResultLauncher<ScanOptions> barcodeLauncher = registerForActivityResult(new ScanContract(),
             result -> {
                 if(result.getContents() == null) {
-                    Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Aucun contenu", Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
+
+                    String data = result.getContents();
+                    String [] prefixe = data.split(":");
+                    if (prefixe[0].equals("geo")) {
+                        //Pour le moment on va juste faire une recherche sur le nom du lieu scanner
+                        String [] prefixe2 = data.split("q=");
+                        String nom_lieu;
+                        if (prefixe2.length > 1) {
+                            nom_lieu = prefixe2[1];
+                        }else {
+                            nom_lieu = "";
+                            Toast.makeText(this, "Le nom du lieu n'est pas precisé", Toast.LENGTH_LONG).show();
+                        }
+                        Intent switchToMapIntent = new Intent(this, MapActivity.class);
+                        switchToMapIntent.putExtra("currentSearch", nom_lieu);
+                        startActivity(switchToMapIntent);
+                    } else if (prefixe[0].equals("http") || prefixe[0].equals("https")) {
+                        Intent launchBrowser = new Intent(Intent.ACTION_VIEW, Uri.parse(data));
+                        startActivity(launchBrowser);
+                    } else if (prefixe.length == 1) {
+                        mSearchEditText.setText(data);
+                    } else {
+                        Toast.makeText(this, "[Non supported data] " + data, Toast.LENGTH_LONG).show();
+                    }
+
                 }
             });
 
-/*
-            new ActivityResultCallback<ScanIntentResult>() {
-                @Override
-                public void onActivityResult(ScanIntentResult result) {
-                    if(result.getContents() == null) {
-                        Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
-                        //Log.d("ScanQR", "onActivityResult: Cancelled");
-                    } else {
-                        Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
-                        //Log.d("ScanQR", "onActivityResult: "+ result.getContents());
-                    }
-                }
-            }
-                );*/
 
     @OnClick(R.id.activity_main_qr_scan)
     public void onQrScanButtonClick() {
         ScanOptions options = new ScanOptions();
         options.setBeepEnabled(false);
+        options.setOrientationLocked(false);
         barcodeLauncher.launch(options);
         //barcodeLauncher.launch(new ScanOptions());
     }
