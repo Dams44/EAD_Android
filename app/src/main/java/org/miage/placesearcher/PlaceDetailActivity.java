@@ -96,15 +96,16 @@ public class PlaceDetailActivity extends AppCompatActivity {
         startActivityForResult(photoPickerIntent, SELECT_PHOTO);
     }
 
-    //Création du QR code de la place, le QR code contient les coordonées GPS
+    // Action à effectuer lors du clique sur le bouton Generate QR code
     @OnClick(R.id.activity_detail_QR_code)
     public void onClickOnGenerateQRcode() {
-        if (!TextUtils.isEmpty(mPlaceStreetValue)) {
-            mQRcode.setImageBitmap(generate_QRCode_Bitmap("geo:"+mPlaceLatitute+','+mPlaceLongitude, 600, 600));
+        if (!TextUtils.isEmpty(mPlaceStreetValue)) { // on verifie qu'on a bien le nom de la place
+            // On appelle la fonction de generation du qr code et puis on definit le resultat comme image
+            mQRcode.setImageBitmap(generate_QRCode_Bitmap("geo:"+mPlaceLatitute+','+mPlaceLongitude+'?q='+mPlaceStreetValue, 600, 600));
         }
     }
 
-    //Transforme du texte en un QR code
+    //Création du QR code de la place avec les coordonées GPS (la fonction transforme du texte en un QR code)
     private Bitmap generate_QRCode_Bitmap(String content,int width,int height){
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
         Map<EncodeHintType, String> hints = new HashMap<>();
