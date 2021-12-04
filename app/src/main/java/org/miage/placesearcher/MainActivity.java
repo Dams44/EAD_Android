@@ -151,48 +151,62 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    // Register the launcher and result handler
+    // Gestion du resultat du scan
     private final ActivityResultLauncher<ScanOptions> barcodeLauncher = registerForActivityResult(new ScanContract(),
             result -> {
                 if(result.getContents() == null) {
+                    // Affiche un toast lorsqu'on a aucun contenu
                     Toast.makeText(this, "Aucun contenu", Toast.LENGTH_LONG).show();
                 } else {
-
+                    // on recupére le contenu du QR code
                     String data = result.getContents();
+                    // On récupère le prefixe, afin de distinguer le type de QR (url,text, geolocalisation...)
                     String [] prefixe = data.split(":");
                     if (prefixe[0].equals("geo")) {
                         //Pour le moment on va juste faire une recherche sur le nom du lieu scanner
                         String [] prefixe2 = data.split("q=");
                         String nom_lieu;
                         if (prefixe2.length > 1) {
+                            // on recupère le nom du lieu géolocalisé
                             nom_lieu = prefixe2[1];
                         }else {
+                            // on affiche un toast pour informer l'utilisateur
                             nom_lieu = "";
                             Toast.makeText(this, "Le nom du lieu n'est pas precisé", Toast.LENGTH_LONG).show();
                         }
+                        // on crée une intent du mapActivity
                         Intent switchToMapIntent = new Intent(this, MapActivity.class);
+                        // on passe en paramètre le nom du lieu
                         switchToMapIntent.putExtra("currentSearch", nom_lieu);
+                        // on demarre l'activité
                         startActivity(switchToMapIntent);
-                    } else if (prefixe[0].equals("http") || prefixe[0].equals("https")) {
+                    } else if (prefixe[0].equals("http") || prefixe[0].equals("https")) { // on verifie que le QR est une URL
+                        // on crée un intent du navigateur
                         Intent launchBrowser = new Intent(Intent.ACTION_VIEW, Uri.parse(data));
-                        startActivity(launchBrowser);
-                    } else if (prefixe.length == 1) {
+                        // on demarre l'activité
+                        startActivity(launchBrowser); 
+                    } else if (prefixe.length == 1) { // dans le cas où le QR contient juste du texte normal
+                        // on modifie le contenu de la barre de recherche
                         mSearchEditText.setText(data);
                     } else {
+                        // Dans le cas des types de QR code non supporté (calendrier, email, tel,...), on affiche les données via un toast
                         Toast.makeText(this, "[Non supported data] " + data, Toast.LENGTH_LONG).show();
                     }
 
                 }
             });
 
-
+// Action à effectuer lors du clique sur le bouton QR Scan
     @OnClick(R.id.activity_main_qr_scan)
     public void onQrScanButtonClick() {
+        // Paramétrage des options de scan
         ScanOptions options = new ScanOptions();
+        // Desactive le beep après le scan
         options.setBeepEnabled(false);
+        // Autorise le changement de l'orientation de la camera (ne fonctionne pas)
         options.setOrientationLocked(false);
+        // Lance la camera de scan
         barcodeLauncher.launch(options);
-        //barcodeLauncher.launch(new ScanOptions());
     }
 
 }
