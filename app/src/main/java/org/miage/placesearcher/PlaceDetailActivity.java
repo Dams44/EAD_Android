@@ -101,7 +101,7 @@ public class PlaceDetailActivity extends AppCompatActivity {
     public void onClickOnGenerateQRcode() {
         if (!TextUtils.isEmpty(mPlaceStreetValue)) { // on verifie qu'on a bien le nom de la place
             // On appelle la fonction de generation du qr code et puis on definit le resultat comme image
-            mQRcode.setImageBitmap(generate_QRCode_Bitmap("geo:"+mPlaceLatitute+','+mPlaceLongitude+'?q='+mPlaceStreetValue, 600, 600));
+            mQRcode.setImageBitmap(generate_QRCode_Bitmap("geo:"+mPlaceLatitute+','+mPlaceLongitude+"?q="+mPlaceStreetValue, 600, 600));
         }
     }
 
