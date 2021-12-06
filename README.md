@@ -7,11 +7,14 @@ Reprise de l’exemple PlaceSearcher du cours
 pour générer un QR Code à partir d’une adresse
 ainsi que Scanner un QR Code et effectuer une recherche.
 
-_ Si URL, recherche dans un navigateur
+- Si URL, recherche dans un navigateur
 
-_ Si coordonnées GPS, recherche dans le Maps de l’appli
+- Si coordonnées GPS, recherche dans le Maps de l’appli
 
-_ Sinon dans la barre de recherche de l’application
+- Sinon dans la barre de recherche de l’application
 
 
+Exemple de génération de QR Code :
+https://drive.google.com/file/d/1Zu7N0TJbms-absMfBQPJF4l27iqtYDxx/view?usp=sharing
 
+https://drive.google.com/file/d/1aOHkceWf9eIz95gUg-2UjzAAVFu8m6zQ/view?usp=sharing
