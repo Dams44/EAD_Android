@@ -15,6 +15,6 @@ ainsi que Scanner un QR Code et effectuer une recherche.
 
 
 Exemple de génération de QR Code :
-https://drive.google.com/file/d/1Zu7N0TJbms-absMfBQPJF4l27iqtYDxx/view?usp=sharing
+![alt text](https://drive.google.com/file/d/1Zu7N0TJbms-absMfBQPJF4l27iqtYDxx/view?usp=sharing)
 
-https://drive.google.com/file/d/1aOHkceWf9eIz95gUg-2UjzAAVFu8m6zQ/view?usp=sharing
+![alt text](https://drive.google.com/file/d/1aOHkceWf9eIz95gUg-2UjzAAVFu8m6zQ/view?usp=sharing)
