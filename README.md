@@ -13,5 +13,3 @@ ainsi que Scanner un QR Code et effectuer une recherche.
 
 - Sinon dans la barre de recherche de l’application
 
-Exempes de
-"D:\Téléchargements\Images readme\Exemples_QRcode.png"
