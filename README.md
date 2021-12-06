@@ -13,3 +13,6 @@ ainsi que Scanner un QR Code et effectuer une recherche.
 
 - Sinon dans la barre de recherche de l’application
 
+<p align="center">
+  <img src="D:\Téléchargements\Images readme\Exemples_QRcode.png" width="350" title="hover text">
+</p>
