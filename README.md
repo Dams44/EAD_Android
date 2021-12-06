@@ -13,8 +13,3 @@ ainsi que Scanner un QR Code et effectuer une recherche.
 
 - Sinon dans la barre de recherche de l’application
 
-
-Exemple de génération de QR Code :
-![alt text](https://drive.google.com/file/d/1Zu7N0TJbms-absMfBQPJF4l27iqtYDxx/view?usp=sharing)
-
-![alt text](https://drive.google.com/file/d/1aOHkceWf9eIz95gUg-2UjzAAVFu8m6zQ/view?usp=sharing)
